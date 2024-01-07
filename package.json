@@ -1,0 +1,14 @@
+{
+  "name": "project-one",
+  "version": "1.0.0",
+  "description": "this is my first BE project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "project-one"
+  ],
+  "author": "Nitendra S. Tomar",
+  "license": "ISC"
+}
