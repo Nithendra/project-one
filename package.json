@@ -2,13 +2,20 @@
   "name": "project-one",
   "version": "1.0.0",
   "description": "this is my first BE project",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node src/index.js"
   },
   "keywords": [
     "project-one"
   ],
   "author": "Nitendra S. Tomar",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "3.1.1"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
