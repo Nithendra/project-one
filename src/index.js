@@ -1,12 +1,20 @@
 import express from "express";
+import dotenv from "dotenv";
+import connectDB from "../db/index.js";
+
 const app = express();
 
-const port = 3000;
-
-app.get("/", (req, res) => {
-  res.send("project-one!");
+// dotenv configuration
+dotenv.config({
+  path: "./.env",
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+connectDB()
+  .then(() => {
+    app.listen(process.env.PORT, () => {
+      console.log("app is running::", process.env.PORT);
+    });
+  })
+  .catch((err) => {
+    console.log("app is not running::", err);
+  });
