@@ -2,7 +2,6 @@
 
 const requestAsycHandler = (reqHandler) => {
   return (req, res, next) => {
-    console.log("asyncHandler-middleware");
     Promise.resolve(reqHandler(req, res, next)).catch((err) => next(err));
   };
 };
