@@ -19,7 +19,7 @@ const userSchema = new Schema(
       type: String,
     },
   },
-  {}
+  { timestamps: true }
 );
 
 userSchema.methods.generateAccessToken = function () {
