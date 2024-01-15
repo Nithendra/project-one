@@ -1,3 +1,5 @@
+import jwt from "jsonwebtoken";
+
 import { requestAsycHandler } from "../utils/requestAsycHandler.js";
 import { ApiError } from "../utils/apiError.js";
 import { User } from "../models/user.model.js";
@@ -107,4 +109,26 @@ const logoutUser = requestAsycHandler(async (req, res) => {
     .json(new ApiResponse(200, {}, "user logged out!!"));
 });
 
-export { registerUser, loginUser, logoutUser };
+const updatePassword = requestAsycHandler(async (req, res) => {
+  // check oldPasswod and new password - req.body
+  const { oldPassword, newPassword } = req.body;
+  // should not empty
+  if (!(oldPassword && newPassword)) {
+    throw new ApiError(400, "Field should not empty."); // this validation is UI responsbility
+  }
+  // take out id from token - req.cookies.refreshToken - in middleware
+  // decode token - in middleware
+  // takeout all details - in middleware
+  const user = await User.findById(req.user._id);
+  // check if oldPassword matching with db passwod
+  if (user.password !== oldPassword) {
+    throw new ApiError(400, "Passwod not matching.");
+  }
+  // if matching update that fileld
+  user.password = newPassword;
+  await user.save({ validateBeforeSave: false });
+  // return res
+  return res.status(200).json(new ApiResponse(200, {}, "Password updated!!"));
+});
+
+export { registerUser, loginUser, logoutUser, updatePassword };
